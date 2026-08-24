@@ -1,5 +1,7 @@
 import React from 'react'
 import Carousel from './Carousel';
+import Shoe1 from '../assets/shoe1.jpg';
+import CategoryGrid from './Categorygrid';
 import './Hero.css'
 
 const Hero = () => {
@@ -9,7 +11,7 @@ const Hero = () => {
     {
       id: 1,
       title: 'Inception',
-      image: 'https://images.unsplash.com/photo-1518676590629-3dcbd9c5a5c9?w=1200&h=500&fit=crop',
+      image: {Shoe1},
       year: 2010,
       rating: 8.8,
     },
@@ -47,12 +49,36 @@ const Hero = () => {
   return (
     // <div>
       <div className="content-grid">
+
           <section className="carousel-large">
             <Carousel 
               slides={carouselSlides}
               autoPlay={true}
               autoPlayInterval={5000}
             />
+
+          <CategoryGrid onSelectCategory={(name) => console.log('Selected category:', name)} />
+
+          <div className="hero-tape">
+            <div className="hero-tape-content">
+              <span>NEW ERA</span>
+              <span>NEW ERA</span>
+              <span>NEW ERA</span>
+              <span>NEW ERA</span>
+              <span>NEW ERA</span>
+               <span>NEW ERA</span>
+              <span>NEW ERA</span>
+              <span>NEW ERA</span>
+              <span>NEW ERA</span>
+              <span>NEW ERA</span>
+               <span>NEW ERA</span>
+              <span>NEW ERA</span>
+              <span>NEW ERA</span>
+              <span>NEW ERA</span>
+              <span>NEW ERA</span>
+            </div>
+          </div>
+
           </section>
         </div>
     // </div>

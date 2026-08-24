@@ -2,14 +2,9 @@
 .content-grid {
   margin-bottom: 3rem;
   padding-top: 4rem;
-  /* break out of any centered/padded parent container so the carousel runs edge-to-edge */
-  width: 100vw;
-  position: relative;
-  left: 50%;
-  right: 50%;
-  margin-left: -50vw;
-  margin-right: -50vw;
+  width: auto;
 }
+
 
 .carousel-large {
   background: transparent;
@@ -75,4 +70,135 @@
 .movie-year {
   font-size: 0.8rem;
   color: #999;
+}
+
+
+
+
+/* .hero-tape {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) 
+  rotate(-2deg)
+  ;
+
+  width: 110%;
+  padding: 18px 0;
+
+  background: #050505;
+  color: white;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  z-index: 10;
+  pointer-events: none;
+}
+
+.hero-tape span {
+  font-size: clamp(1.5rem, 4vw, 4rem);
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+} *//* CONTENT GRID */
+
+
+.carousel-large {
+  background: transparent;
+  padding: 0;
+  border-radius: 0;
+  box-shadow: none;
+  min-height: auto;
+}
+
+
+
+
+.hero-tape {
+  position: absolute;
+  top: 130%;
+  left: 0;
+  right: 0;
+  transform: translateY(-50%);
+  
+  /* width: 100vw; */
+  padding: 20px 0;
+  margin-left: calc(-50vw + 50%);
+  
+  background: #050505;
+  color: white;
+  
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  
+  z-index: 10;
+  pointer-events: none;
+}
+
+.hero-tape-content {
+  display: flex;
+  gap: 3rem;
+  white-space: nowrap;
+  animation: slide-tape 20s linear infinite;
+  font-size: clamp(1.2rem, 3vw, 2.5rem);
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.hero-tape-content span {
+  flex-shrink: 0;
+}
+
+@keyframes slide-tape {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+
+/* RESPONSIVE - TABLET */
+@media (max-width: 900px) {
+  .hero-tape {
+    padding: 16px 0;
+  }
+
+  .hero-tape-content {
+    gap: 2.5rem;
+    font-size: clamp(1rem, 2.5vw, 2rem);
+    animation: slide-tape 18s linear infinite;
+  }
+}
+
+/* RESPONSIVE - MOBILE */
+@media (max-width: 600px) {
+  .hero-tape {
+    padding: 12px 0;
+    top: 75%;
+  }
+
+  .hero-tape-content {
+    gap: 1.5rem;
+    font-size: clamp(0.8rem, 2vw, 1.5rem);
+    animation: slide-tape 15s linear infinite;
+  }
+}
+
+/* RESPONSIVE - SMALL MOBILE */
+@media (max-width: 400px) {
+  .hero-tape {
+    padding: 10px 0;
+  }
+
+  .hero-tape-content {
+    gap: 1rem;
+    font-size: clamp(0.7rem, 1.8vw, 1.2rem);
+    animation: slide-tape 12s linear infinite;
+  }
 }

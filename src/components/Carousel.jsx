@@ -70,12 +70,12 @@ function Carousel({ slides = [], autoPlay = true, autoPlayInterval = 5000 }) {
       </div>
 
       {/* Navigation Buttons */}
-      <button className="carousel-btn carousel-btn-prev" onClick={goToPrevious}>
+      {/* <button className="carousel-btn carousel-btn-prev" onClick={goToPrevious}>
         <ChevronLeft size={32} />
       </button>
       <button className="carousel-btn carousel-btn-next" onClick={goToNext}>
         <ChevronRight size={32} />
-      </button>
+      </button> */}
 
       {/* Indicators/Dots */}
       {/* <div className="carousel-indicators">

@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react'
 import { Search, Bookmark, User, Menu, X, ChevronDown } from 'lucide-react'
 import './Navbar.css'
 
-const navLinks = ['New', 'Category', 'Bags', 'Sale',]
+const navLinks = ['Home', 'New', 'Category', 'Bags', 'Sale',]
 
 const categories = [
   'Party', 'Sport', 'Dailywear', 'Boots',

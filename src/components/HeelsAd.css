@@ -1,0 +1,132 @@
+.heels-ad {
+  position: relative;
+  width: 100%;
+  height: 550px;
+  overflow: hidden;
+  background: #f5f5f5;
+  margin-bottom: 3rem;
+}
+
+.heels-ad-image {
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  background-image: url('https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=1200&h=500&fit=crop');
+  position: relative;
+}
+
+.heels-ad-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 3rem 7.75rem;
+}
+
+.heels-ad-content {
+  color: white;
+  max-width: 400px;
+  text-align: left;
+}
+
+.heels-ad-content h2 {
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin: 0 0 1rem 0;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.heels-ad-subtitle {
+  font-size: 1.1rem;
+  margin: 0 0 1.5rem 0;
+  color: #ddd;
+  line-height: 1.5;
+}
+
+.heels-ad-btn {
+  background: white;
+  color: black;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 500;
+  border: none;
+  cursor: pointer;
+  text-transform: uppercase;
+  transition: transform 0.3s ease-in-out, background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+  backdrop-filter: blur(12px);
+}
+
+.heels-ad-btn:hover {
+  transform: scale(1.03);
+  background: black;
+  color: white;
+}
+
+/* RESPONSIVE - TABLET */
+@media (max-width: 900px) {
+  .heels-ad {
+    height: 350px;
+  }
+
+  .heels-ad-overlay {
+    padding: 2rem 1.5rem;
+    justify-content: center;
+  }
+
+  .heels-ad-content {
+    max-width: 100%;
+    text-align: center;
+  }
+
+  .heels-ad-content h2 {
+    font-size: 2rem;
+  }
+
+  .heels-ad-subtitle {
+    font-size: 1rem;
+  }
+}
+
+/* RESPONSIVE - MOBILE */
+@media (max-width: 600px) {
+  .heels-ad {
+    height: 300px;
+    margin-bottom: 2rem;
+  }
+
+  .heels-ad-overlay {
+    padding: 1.5rem;
+  }
+
+  .heels-ad-content h2 {
+    font-size: 1.5rem;
+  }
+
+  .heels-ad-subtitle {
+    font-size: 0.95rem;
+  }
+
+  .heels-ad-btn {
+    padding: 0.6rem 1.2rem;
+    font-size: 0.9rem;
+  }
+}
+
+/* RESPONSIVE - SMALL MOBILE */
+@media (max-width: 400px) {
+  .heels-ad {
+    height: 250px;
+  }
+
+  .heels-ad-content h2 {
+    font-size: 1.3rem;
+  }
+
+  .heels-ad-subtitle {
+    font-size: 0.85rem;
+  }
+}

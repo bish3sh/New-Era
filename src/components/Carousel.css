@@ -123,7 +123,7 @@
   /* border: 1px solid rgba(255, 255, 255, 0.6); */
   padding: 0.75rem 1.5rem;
   font-size: 1rem;
-  font-weight: 400;
+  font-weight: 500;
   /* border-radius: 6px;   */
   cursor: pointer;
   transition: transform 0.3s ease-in-out, background-color 0.3s ease-in-out, color 0.3s ease-in-out;

@@ -34,6 +34,7 @@ const Features = () => {
       price: '24,890.00',
       isNew: true,
     },
+    
   ];
 
   return (

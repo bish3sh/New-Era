@@ -9,11 +9,12 @@ function CarouselCard({ image, title, subtitle }) {
     <div className="carousel-card">
       <div className="carousel-card-image" style={{ backgroundImage: `url(${image})` }}>
         <div className="carousel-card-overlay">
-          <h2>{title}</h2>
-          {subtitle && <p className="carousel-meta">{subtitle}</p>}
+          {/* <h2>{title}</h2> */}
+          <h2>Latest Arrivals</h2>
+          {/* {subtitle && <p className="carousel-meta">{subtitle}</p>} */}
           <div className="carousel-actions">
-            <button className="shop-btn">Shop Now</button>
-            <button className="view-more-btn">View More</button>
+            <button className="shop-btn">Shop now</button>
+            {/* <button className="view-more-btn">View More</button> */}
           </div>
         </div>
       </div>
@@ -35,21 +36,21 @@ function Carousel({ slides = [], autoPlay = true, autoPlayInterval = 5000 }) {
     return () => clearInterval(interval);
   }, [autoPlay, autoPlayInterval, slides.length]);
 
-  const goToPrevious = () => {
-    setCurrentIndex((prev) => (prev - 1 + slides.length) % slides.length);
-  };
+  // const goToPrevious = () => {
+  //   setCurrentIndex((prev) => (prev - 1 + slides.length) % slides.length);
+  // };
 
-  const goToNext = () => {
-    setCurrentIndex((prev) => (prev + 1) % slides.length);
-  };
+  // const goToNext = () => {
+  //   setCurrentIndex((prev) => (prev + 1) % slides.length);
+  // };
 
-  const goToSlide = (index) => {
-    setCurrentIndex(index);
-  };
+  // const goToSlide = (index) => {
+  //   setCurrentIndex(index);
+  // };
 
-  if (!slides || slides.length === 0) {
-    return <div className="carousel">No slides available</div>;
-  }
+  // if (!slides || slides.length === 0) {
+  //   return <div className="carousel">No slides available</div>;
+  // }
 
   return (
     <div className="carousel">
@@ -62,8 +63,8 @@ function Carousel({ slides = [], autoPlay = true, autoPlayInterval = 5000 }) {
           >
             <CarouselCard
               image={slide.image}
-              title={slide.title}
-              subtitle={slide.year}
+              // title={slide.title}
+              // subtitle={slide.year}
             />
           </div>
         ))}

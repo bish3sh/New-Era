@@ -3,17 +3,17 @@ import './Categorygrid.css';
 
 const categories = [
   {
-    name: 'Casual',
+    name: 'Heels',
     image:
       'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=800&q=80',
   },
   {
-    name: 'Formal',
+    name: 'Sports',
     image:
       'https://images.unsplash.com/photo-1614252369475-531eba835eb1?w=800&q=80',
   },
   {
-    name: 'Sports',
+    name: 'Dailywear',
     image:
       'https://images.unsplash.com/photo-1552346154-21d32810aba3?w=800&q=80',
   },

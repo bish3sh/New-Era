@@ -5,7 +5,7 @@ import './Navbar.css'
 const navLinks = ['Home', 'New', 'Category', 'Bags', 'Sale',]
 
 const categories = [
-  'Party', 'Sport', 'Dailywear', 'Boots',
+  'Heels', 'Sport', 'Dailywear', 'Boots',
 ]
 
 const collections = ['Heels', 'Boots']

@@ -6,12 +6,12 @@ import './Hero.css'
 
 const Hero = () => {
 
-     // Carousel slides data
+  // Carousel slides data
   const carouselSlides = [
     {
       id: 1,
       title: 'Inception',
-      image: {Shoe1},
+      image: { Shoe1 },
       year: 2010,
       rating: 8.8,
     },
@@ -44,43 +44,43 @@ const Hero = () => {
       rating: 8.0,
     },
   ];
- 
+
 
   return (
     // <div>
-      <div className="content-grid">
+    <div className="content-grid">
 
-          <section className="carousel-large">
-            <Carousel 
-              slides={carouselSlides}
-              autoPlay={true}
-              autoPlayInterval={5000}
-            />
+      <section className="carousel-large">
+        <Carousel
+          slides={carouselSlides}
+          autoPlay={true}
+          autoPlayInterval={5000}
+        />
 
-          <CategoryGrid onSelectCategory={(name) => console.log('Selected category:', name)} />
+        <CategoryGrid onSelectCategory={(name) => console.log('Selected category:', name)} />
 
-          <div className="hero-tape">
-            <div className="hero-tape-content">
-              <span>NEW ERA</span>
-              <span>NEW ERA</span>
-              <span>NEW ERA</span>
-              <span>NEW ERA</span>
-              <span>NEW ERA</span>
-               <span>NEW ERA</span>
-              <span>NEW ERA</span>
-              <span>NEW ERA</span>
-              <span>NEW ERA</span>
-              <span>NEW ERA</span>
-               <span>NEW ERA</span>
-              <span>NEW ERA</span>
-              <span>NEW ERA</span>
-              <span>NEW ERA</span>
-              <span>NEW ERA</span>
-            </div>
+        <div className="hero-tape">
+          <div className="hero-tape-content">
+            <span>NEW ERA</span>
+            <span>NEW ERA</span>
+            <span>NEW ERA</span>
+            <span>NEW ERA</span>
+            <span>NEW ERA</span>
+            <span>NEW ERA</span>
+            <span>NEW ERA</span>
+            <span>NEW ERA</span>
+            <span>NEW ERA</span>
+            <span>NEW ERA</span>
+            <span>NEW ERA</span>
+            <span>NEW ERA</span>
+            <span>NEW ERA</span>
+            <span>NEW ERA</span>
+            <span>NEW ERA</span>
           </div>
-
-          </section>
         </div>
+
+      </section>
+    </div>
     // </div>
   )
 }

@@ -178,6 +178,10 @@
 
 /* RESPONSIVE - MOBILE */
 @media (max-width: 600px) {
+  .content-grid{
+    padding: 3rem 0;
+  }
+
   .hero-tape {
     padding: 12px 0;
     top: 75%;

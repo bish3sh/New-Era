@@ -1,0 +1,139 @@
+.about-us {
+    background: #fcf9f9;
+    padding: 4rem 0;
+}
+
+.about-us-container {
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+}
+
+/* IMAGE SECTION */
+.about-us-image-section {
+    flex: 1;
+    min-width: 0;
+    max-width: 650px;
+}
+
+.about-us-image {
+    width: 100%;
+    height: auto;
+    max-width: 650px;
+    display: block;
+    object-fit: cover;
+    border-radius: 0px;
+    aspect-ratio: 650 / 450;
+}
+
+/* CONTENT SECTION */
+.about-us-content-section {
+    flex: 1;
+    padding: 2rem;
+}
+
+.about-us-content {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.about-us-title {
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 700;
+    color: #111;
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    line-height: 1.2;
+}
+
+.about-us-description {
+    font-size: 0.90rem;
+    font-weight: 450;
+    line-height: 1.7;
+    color: #333;
+    margin: 0;
+    text-align: center;
+}
+
+
+
+/* RESPONSIVE - TABLET */
+@media (max-width: 900px) {
+    .about-us {
+        padding: 3rem 0;
+    }
+
+    .about-us-container {
+        flex-direction: column;
+        gap: 2rem;
+    }
+
+    .about-us-image-section {
+        order: 2;
+    }
+
+    .about-us-content-section {
+        order: 1;
+        padding: 0;
+    }
+
+    .about-us-title {
+        font-size: 2.2rem;
+    }
+
+    .about-us-description {
+        font-size: 0.95rem;
+    }
+
+
+}
+
+/* RESPONSIVE - MOBILE */
+@media (max-width: 600px) {
+    .about-us {
+        padding: 2.5rem 0;
+    }
+
+    .about-us-container {
+        padding: 0 1rem;
+        gap: 1.5rem;
+    }
+
+    .about-us-content-section {
+        padding: 0;
+    }
+
+    .about-us-title {
+        font-size: 1.8rem;
+    }
+
+    .about-us-description {
+        font-size: 0.9rem;
+        line-height: 1.6;
+    }
+
+}
+
+/* RESPONSIVE - SMALL MOBILE */
+@media (max-width: 400px) {
+    .about-us-container {
+        padding: 0 0.75rem;
+    }
+
+    .about-us-title {
+        font-size: 1.5rem;
+    }
+
+    .about-us-description {
+        font-size: 0.85rem;
+    }
+
+
+
+}

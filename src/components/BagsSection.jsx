@@ -1,8 +1,8 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Heart, Share2, ChevronLeft, ChevronRight } from 'lucide-react';
-import './Features.css';
+import './BagsSection.css';
 
-const Features = () => {
+const BagsSection = () => {
   const [hoveredCard, setHoveredCard] = useState(null);
   const [currentSlide, setCurrentSlide] = useState(0);
   const [cardWidth, setCardWidth] = useState(0);
@@ -13,49 +13,48 @@ const Features = () => {
   const products = [
     {
       id: 1,
-      name: 'Adidas 01-F22',
-      image: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400&h=400&fit=crop',
-      price: '14,990.00',
-      isNew: true,
+      name: 'Leather Backpack 01',
+      image: 'https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=400&h=400&fit=crop',
+      price: '8,990.00',
+      isBag: true,
     },
     {
       id: 2,
-      name: 'Adidas 01-F23',
-      image: 'https://images.unsplash.com/photo-1591195853828-11db59a44f6b?w=400&h=400&fit=crop',
-      price: '14,990.00',
-      isNew: true,
+      name: 'Canvas Tote Bag',
+      image: 'https://images.unsplash.com/photo-1590874103328-eac38a683ce7?w=400&h=400&fit=crop',
+      price: '4,500.00',
+      isBag: true,
     },
     {
       id: 3,
-      name: 'Adidas 01-F24',
-      image: 'https://images.unsplash.com/photo-1591195853828-11db59a44f6b?w=400&h=400&fit=crop',
-      price: '14,990.00',
-      isNew: true,
+      name: 'Travel Duffel Bag',
+      image: 'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=400&h=400&fit=crop',
+      price: '12,490.00',
+      isBag: true,
     },
     {
       id: 4,
-      name: 'Adidas 01-F25',
-      image: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400&h=400&fit=crop',
-      price: '24,890.00',
-      isNew: true,
+      name: 'Classic Crossbody',
+      image: 'https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=400&h=400&fit=crop',
+      price: '6,890.00',
+      isBag: true,
     },
     {
       id: 5,
-      name: 'Adidas 01-F26',
-      image: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400&h=400&fit=crop',
-      price: '16,990.00',
-      isNew: true,
+      name: 'Urban Messenger Bag',
+      image: 'https://images.unsplash.com/photo-1590874103328-eac38a683ce7?w=400&h=400&fit=crop',
+      price: '9,990.00',
+      isBag: true,
     },
     {
       id: 6,
-      name: 'Adidas 01-F27',
-      image: 'https://images.unsplash.com/photo-1591195853828-11db59a44f6b?w=400&h=400&fit=crop',
-      price: '18,490.00',
-      isNew: true,
+      name: 'Sport Gym Bag',
+      image: 'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=400&h=400&fit=crop',
+      price: '5,490.00',
+      isBag: true,
     },
   ];
 
-  // Calculate visible cards based on screen size
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth <= 400) {
@@ -74,7 +73,6 @@ const Features = () => {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  // Calculate card width (including gap)
   useEffect(() => {
     if (containerRef.current) {
       const container = containerRef.current;
@@ -95,16 +93,15 @@ const Features = () => {
     setCurrentSlide((prev) => Math.min(maxSlide, prev + 1));
   };
 
-  // Calculate translation
   const translateValue = -currentSlide * cardWidth;
 
   return (
-    <section className="features-section">
-      <div className="features-header">
-        <h2>New Arrivals</h2>
-        <div className="nav-arrows">
+    <section className="bags-section">
+      <div className="bags-header">
+        <h2>Bags Collection</h2>
+        <div className="bags-nav-arrows">
           <button
-            className="arrow-btn"
+            className="bags-arrow-btn"
             aria-label="Previous"
             onClick={handlePrev}
             disabled={currentSlide === 0}
@@ -112,7 +109,7 @@ const Features = () => {
             <ChevronLeft size={24} />
           </button>
           <button
-            className="arrow-btn"
+            className="bags-arrow-btn"
             aria-label="Next"
             onClick={handleNext}
             disabled={currentSlide === maxSlide}
@@ -122,9 +119,9 @@ const Features = () => {
         </div>
       </div>
 
-      <div className="products-carousel-container" ref={containerRef}>
+      <div className="bags-carousel-container" ref={containerRef}>
         <div
-          className="products-carousel-track"
+          className="bags-carousel-track"
           ref={trackRef}
           style={{
             transform: `translateX(${translateValue}px)`,
@@ -133,27 +130,27 @@ const Features = () => {
           {products.map((product) => (
             <div
               key={product.id}
-              className="product-card"
+              className="bags-card"
               onMouseEnter={() => setHoveredCard(product.id)}
               onMouseLeave={() => setHoveredCard(null)}
             >
-              {/* {product.isNew && <span className="new-badge">New</span>} */}
+              {/* {product.isBag && <span className="bags-badge">Popular</span>} */}
 
-              <div className="product-image-wrapper">
+              <div className="bags-image-wrapper">
                 <img
                   src={product.image}
                   alt={product.name}
-                  className="product-image"
+                  className="bags-image"
                 />
 
                 {/* {hoveredCard === product.id && (
-                  <div className="product-overlay">
-                    <button className="add-to-cart-btn">Add To Cart</button>
-                    <div className="action-icons">
-                      <button className="icon-btn" aria-label="Add to wishlist">
+                  <div className="bags-overlay">
+                    <button className="bags-add-to-cart-btn">Add To Cart</button>
+                    <div className="bags-action-icons">
+                      <button className="bags-icon-btn" aria-label="Add to wishlist">
                         <Heart size={20} />
                       </button>
-                      <button className="icon-btn" aria-label="Share">
+                      <button className="bags-icon-btn" aria-label="Share">
                         <Share2 size={20} />
                       </button>
                     </div>
@@ -161,20 +158,20 @@ const Features = () => {
                 )} */}
               </div>
 
-              <div className="product-info">
-                <h3 className="product-name">{product.name}</h3>
-                <p className="product-price">Rs. {product.price}</p>
+              <div className="bags-info">
+                <h3 className="bags-name">{product.name}</h3>
+                <p className="bags-price">Rs. {product.price}</p>
               </div>
             </div>
           ))}
         </div>
       </div>
 
-      <div className="view-all-container">
-        <button className="view-all-btn">View All</button>
+      <div className="bags-view-all-container">
+        <button className="bags-view-all-btn">View All </button>
       </div>
     </section>
   );
 };
 
-export default Features;
+export default BagsSection;

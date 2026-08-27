@@ -11,6 +11,7 @@ function CarouselCard({ image, title, subtitle }) {
         <div className="carousel-card-overlay">
           {/* <h2>{title}</h2> */}
           <h2>Latest Arrivals</h2>
+          <p className="carousel-subtitle">Fresh styles for you to check out</p>
           {/* {subtitle && <p className="carousel-meta">{subtitle}</p>} */}
           <div className="carousel-actions">
             <button className="shop-btn">Shop now</button>

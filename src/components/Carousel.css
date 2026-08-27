@@ -92,11 +92,18 @@
   text-transform: uppercase;
 }
 
-.carousel-meta {
+.carousel-subtitle {
+  font-size: 1.1rem;
+  margin: 0 0 1.5rem 0;
+  color: #ddd;
+  line-height: 1.5;
+}
+
+/* .carousel-meta {
   font-size: 1.1rem;
   margin-bottom: 1rem;
   color: #ddd;
-}
+} */
 
 .carousel-actions {
   display: flex;
@@ -129,7 +136,7 @@
   transition: transform 0.3s ease-in-out, background-color 0.3s ease-in-out, color 0.3s ease-in-out;
   text-transform: uppercase;
   backdrop-filter: blur(12px);
-
+font-family: "Encode Sans Expanded",sans-serif ;
 }
 
 .shop-btn:hover {
@@ -251,12 +258,16 @@
     height: 350px;
   }
 
-  .carousel-card-overlay h2 {
-    font-size: 1.8rem;
-  }
-
   .carousel-card-overlay {
     padding: 2rem 1.5rem 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .carousel-card-overlay h2 {
+    font-size: 1.8rem;
   }
 
   .carousel-btn {
@@ -280,21 +291,54 @@
   }
 }
 
+@media (max-width: 600px) {
+  .carousel {
+    height: 300px;
+  }
+
+  .carousel-card-overlay {
+    padding: 1rem 1rem 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .carousel-card-overlay h2 {
+    font-size: 1.5rem;
+  }
+
+  .carousel-subtitle {
+    font-size: 0.95rem;
+  }
+
+  .shop-btn {
+    padding: 0.65rem 1.2rem;
+    font-size: 0.9rem;
+  }
+}
+
 @media (max-width: 480px) {
   .carousel {
     height: 250px;
   }
 
   .carousel-card-overlay {
-    padding-bottom: 5rem;
+    padding: 0.75rem 1rem 4rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
   }
 
   .carousel-card-overlay h2 {
     font-size: 1.3rem;
   }
 
-  .carousel-meta {
-    font-size: 0.9rem;
+  .carousel-subtitle {
+    font-size: 0.85rem;
   }
 
   .shop-btn,

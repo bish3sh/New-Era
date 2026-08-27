@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react'
-import { Search, Bookmark, User, Menu, X, ChevronDown } from 'lucide-react'
+import { Search, Heart, ShoppingCart, User, Menu, X, ChevronDown } from 'lucide-react'
 import './Navbar.css'
 
 const navLinks = ['Home', 'New', 'Category', 'Bags', 'Sale',]
@@ -13,17 +13,23 @@ const collections = ['Heels', 'Boots']
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false)
   const [categoryOpen, setCategoryOpen] = useState(false)
+  const [authOpen, setAuthOpen] = useState(false)
   const [searchOpen, setSearchOpen] = useState(false)
   const [dropdownOffset, setDropdownOffset] = useState(14)
+  const [authDropdownOffset, setAuthDropdownOffset] = useState(14)
   const [navBottom, setNavBottom] = useState(0)
 
   const categoryRef = useRef(null)
+  const authRef = useRef(null)
   const navRef = useRef(null)
 
   useEffect(() => {
     const handleClickOutside = (e) => {
       if (categoryRef.current && !categoryRef.current.contains(e.target)) {
         setCategoryOpen(false)
+      }
+      if (authRef.current && !authRef.current.contains(e.target)) {
+        setAuthOpen(false)
       }
     }
     document.addEventListener('mousedown', handleClickOutside)
@@ -40,6 +46,11 @@ const Navbar = () => {
         if (categoryRef.current) {
           const itemRect = categoryRef.current.getBoundingClientRect()
           setDropdownOffset(navRect.bottom - itemRect.bottom)
+        }
+
+        if (authRef.current) {
+          const authRect = authRef.current.getBoundingClientRect()
+          setAuthDropdownOffset(navRect.bottom - authRect.bottom)
         }
       }
     }
@@ -91,8 +102,30 @@ const Navbar = () => {
 
         <div className="navbar-right">
           <Search size={22} className="navbar-icon" onClick={() => setSearchOpen(true)} />
-          <Bookmark size={24} className="navbar-icon" />
-          <User size={24} className="navbar-icon" />
+          <Heart size={24} className="navbar-icon" />
+          <ShoppingCart size={24} className="navbar-icon" />
+          
+          <div className="auth-item" ref={authRef}>
+            <button
+              className={`auth-trigger ${authOpen ? 'active' : ''}`}
+              onClick={() => setAuthOpen((prev) => !prev)}
+            >
+              <User size={24} />
+            </button>
+
+            <div
+              className={`auth-dropdown ${authOpen ? 'open' : ''}`}
+              style={{ '--auth-dropdown-gap': `${authDropdownOffset}px` }}
+            >
+              <a href="#" className="auth-option" onClick={() => setAuthOpen(false)}>
+                Sign In
+              </a>
+              <a href="#" className="auth-option" onClick={() => setAuthOpen(false)}>
+                Log In
+              </a>
+            </div>
+          </div>
+
           <Menu size={24} className="navbar-icon menu-toggle" onClick={() => setIsOpen(true)} />
         </div>
       </nav>
@@ -167,6 +200,15 @@ const Navbar = () => {
             )
           )}
         </ul>
+
+        <div className="offcanvas-auth">
+          <a href="#" className="offcanvas-auth-link" onClick={() => setIsOpen(false)}>
+            Sign In
+          </a>
+          <a href="#" className="offcanvas-auth-link" onClick={() => setIsOpen(false)}>
+            Log In
+          </a>
+        </div>
       </div>
     </div>
   )

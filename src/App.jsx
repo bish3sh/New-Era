@@ -5,6 +5,9 @@ import Features from './components/Features';
 import Footer from './components/Footer';
 import HeelsAd from './components/Heelsad';
 import BootsAd from './components/BootsAd';
+import TopSelling from './components/TopSelling';
+import BagsSection from './components/BagsSection';
+import AboutUs from './components/AboutUs';
 
 
 const App = () => {
@@ -14,7 +17,10 @@ const App = () => {
       <Hero />
       <Features />
       <HeelsAd />
+      <TopSelling />
       <BootsAd />
+      <BagsSection />
+      <AboutUs />
       <Footer />
     </div>
   )

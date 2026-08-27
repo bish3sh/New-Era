@@ -118,7 +118,7 @@
 
 .hero-tape {
   position: absolute;
-  top: 130%;
+  top: 120%;
   left: 0;
   right: 0;
   transform: translateY(-50%);
@@ -140,11 +140,11 @@
 
 .hero-tape-content {
   display: flex;
-  gap: 3rem;
+  gap: 10rem;
   white-space: nowrap;
   animation: slide-tape 20s linear infinite;
-  font-size: clamp(1.2rem, 3vw, 2.5rem);
-  font-weight: 800;
+  font-size: clamp(1rem, 1vw, 2.5rem);
+  font-weight: 500;
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }

@@ -119,6 +119,7 @@ const Features = () => {
           >
             <ChevronRight size={24} />
           </button>
+          <button className="view-all-btn-header">View All</button>
         </div>
       </div>
 
@@ -168,10 +169,6 @@ const Features = () => {
             </div>
           ))}
         </div>
-      </div>
-
-      <div className="view-all-container">
-        <button className="view-all-btn">View All</button>
       </div>
     </section>
   );

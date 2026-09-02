@@ -116,6 +116,7 @@ const BagsSection = () => {
           >
             <ChevronRight size={24} />
           </button>
+          <button className="bags-view-all-btn-header">View All</button>
         </div>
       </div>
 
@@ -165,10 +166,6 @@ const BagsSection = () => {
             </div>
           ))}
         </div>
-      </div>
-
-      <div className="bags-view-all-container">
-        <button className="bags-view-all-btn">View All </button>
       </div>
     </section>
   );

@@ -116,6 +116,7 @@ const TopSelling = () => {
           >
             <ChevronRight size={24} />
           </button>
+          <button className="top-selling-view-all-btn-header">View All</button>
         </div>
       </div>
 
@@ -165,10 +166,6 @@ const TopSelling = () => {
             </div>
           ))}
         </div>
-      </div>
-
-      <div className="top-selling-view-all-container">
-        <button className="top-selling-view-all-btn">View All</button>
       </div>
     </section>
   );

@@ -1,0 +1,385 @@
+/* PRODUCT DETAIL PAGE */
+.pdp-section {
+  background: white;
+  padding: 9rem 0 4rem;
+}
+
+.pdp-container {
+  max-width: 88rem;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+@media (min-width: 640px) {
+  .pdp-container {
+    padding: 0 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .pdp-container {
+    padding: 0 2rem;
+  }
+}
+
+/* BREADCRUMB */
+.pdp-breadcrumb {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+  margin-bottom: 1.5rem;
+  font-size: 0.8rem;
+  color: #999;
+}
+
+.pdp-breadcrumb-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.pdp-breadcrumb-sep {
+  color: #ccc;
+}
+
+/* LAYOUT */
+.pdp-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2.5rem;
+}
+
+@media (min-width: 900px) {
+  .pdp-layout {
+    grid-template-columns: 1fr 1fr;
+    gap: 3.5rem;
+  }
+}
+
+/* GALLERY */
+.pdp-main-image-wrap {
+  width: 100%;
+  aspect-ratio: 1;
+  background: #f2f1ee;
+  overflow: hidden;
+}
+
+.pdp-main-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.pdp-thumbs {
+  margin-top: 1rem;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 0.75rem;
+}
+
+@media (max-width: 480px) {
+  .pdp-thumbs {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.pdp-thumb {
+  aspect-ratio: 1;
+  background: #f2f1ee;
+  border: 1px solid #f0f0f0;
+  padding: 0;
+  cursor: pointer;
+  overflow: hidden;
+  transition: border-color 0.2s ease;
+}
+
+.pdp-thumb:hover {
+  border-color: #ccc;
+}
+
+.pdp-thumb--active {
+  border-color: #111;
+}
+
+.pdp-thumb-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.pdp-thumb-more {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: #737373;
+  background: #fafafa;
+}
+
+/* DETAILS */
+.pdp-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.pdp-brand-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+}
+
+.pdp-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.pdp-brand-dot {
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  background: #111;
+  flex-shrink: 0;
+}
+
+.pdp-brand-name {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #111;
+}
+
+.pdp-sku {
+  font-size: 0.75rem;
+  color: #bbb;
+  letter-spacing: 0.03em;
+}
+
+.pdp-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #111;
+  margin: 0 0 0.6rem;
+  line-height: 1.3;
+}
+
+.pdp-rating {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1.25rem;
+}
+
+.pdp-stars {
+  display: flex;
+  gap: 2px;
+}
+
+.pdp-star {
+  color: #e0e0e0;
+}
+
+.pdp-star--filled {
+  fill: #fbbf24;
+  color: #fbbf24;
+}
+
+.pdp-reviews {
+  font-size: 0.8rem;
+  color: #999;
+}
+
+.pdp-price {
+  font-size: 2rem;
+  font-weight: 800;
+  color: #111;
+  margin: 0 0 1.75rem;
+}
+
+/* OPTION BLOCKS — styled after the Catalogue drawer accordion sections */
+.pdp-option-block {
+  padding-top: 1.25rem;
+  border-top: 1px solid #f0f0f0;
+  margin-bottom: 0.25rem;
+}
+
+.pdp-option-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #999;
+  display: block;
+  margin-bottom: 0.9rem;
+}
+
+.pdp-option-value {
+  color: #111;
+  font-weight: 600;
+  text-transform: none;
+  letter-spacing: 0;
+  margin-left: 0.3rem;
+}
+
+/* COLOR — matches .category-dropdown / catalogue drawer's color-btn exactly */
+.pdp-color-grid {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.pdp-color-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.3rem;
+  background: none;
+  border: 1px solid transparent;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.pdp-color-btn:hover {
+  border-color: #d4d4d4;
+}
+
+.pdp-color-btn--selected {
+  border-color: #111;
+}
+
+.pdp-color-swatch {
+  width: 1.75rem;
+  height: 1.75rem;
+  border-radius: 50%;
+  border: 1px solid #d4d4d4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.pdp-color-check {
+  width: 0.8rem;
+  height: 0.8rem;
+  color: white;
+}
+
+.pdp-color-check--dark {
+  color: #111;
+}
+
+/* SIZE — matches the catalogue drawer's size-btn exactly */
+.pdp-size-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 0.5rem;
+}
+
+@media (max-width: 480px) {
+  .pdp-size-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.pdp-size-btn {
+  padding: 0.6rem 0;
+  font-size: 0.8rem;
+  font-weight: 600;
+  background: white;
+  color: #262626;
+  border: 1px solid #d4d4d4;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.pdp-size-btn:hover {
+  border-color: #262626;
+}
+
+.pdp-size-btn--selected,
+.pdp-size-btn--selected:hover {
+  background: black;
+  color: white;
+  border-color: black;
+}
+
+.pdp-size-guide {
+  background: none;
+  border: none;
+  padding: 0;
+  margin-top: 0.75rem;
+  font-size: 0.75rem;
+  color: #999;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.pdp-size-guide:hover {
+  color: #111;
+}
+
+/* ADD TO CART */
+.pdp-cart-row {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 1.75rem;
+}
+
+.pdp-add-to-cart {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  background: black;
+  color: white;
+  border: none;
+  padding: 0.9rem 1rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.pdp-add-to-cart:hover {
+  background: #262626;
+}
+
+.pdp-wishlist-btn {
+  width: 52px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: white;
+  border: 1px solid #d4d4d4;
+  color: #333;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.pdp-wishlist-btn:hover {
+  border-color: #111;
+}
+
+.pdp-wishlist-icon--active {
+  fill: #e11d48;
+  color: #e11d48;
+}
+
+/* DELIVERY NOTE */
+.pdp-delivery {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1.25rem;
+  font-size: 0.8rem;
+  color: #737373;
+}
+
+.pdp-delivery-icon {
+  color: #999;
+  flex-shrink: 0;
+}

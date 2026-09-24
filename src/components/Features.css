@@ -1,7 +1,11 @@
 /* FEATURES SECTION */
 .features-section {
-  padding: 0rem 0 2rem;
-  background: rgb(255, 255, 255);
+  /* padding: 0rem 0 2rem;
+  background: rgb(255, 255, 255); */
+  
+  max-width: 86rem;
+  margin: 0 auto;
+  padding: 0 1rem;
 }
 
 /* HEADER */
@@ -10,7 +14,7 @@
   align-items: center;
   justify-content: space-between;
   margin-bottom: 2.5rem;
-  padding: 0 1.5rem;
+  padding: 0;
 }
 
 .features-header h2 {
@@ -82,7 +86,7 @@
 /* PRODUCTS CAROUSEL CONTAINER */
 .products-carousel-container {
   overflow: hidden;
-  padding: 0 1.5rem;
+  padding: 0 0 1rem;
   margin-bottom: 3rem;
 }
 
@@ -97,15 +101,19 @@
 .product-card {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 0;
   cursor: pointer;
   flex: 0 0 calc(25% - 1.125rem);
   min-width: 0;
-  transition: transform 0.3s ease;
+  background: white;
+  border: 1px solid #f0f0f0;
+  transition: all 0.3s ease;
 }
 
 .product-card:hover {
   transform: translateY(-4px);
+  border-color: #ddd;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
 }
 
 .product-image-wrapper {
@@ -143,82 +151,125 @@
   z-index: 2;
 }
 
-/* OVERLAY */
+.product-wishlist {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  padding: 8px;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(2px);
+  border: none;
+  border-radius: 50%;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
+  cursor: pointer;
+  display: flex;
+  transition: all 0.2s ease;
+  z-index: 2;
+}
+
+.product-wishlist:hover {
+  background: white;
+  transform: scale(1.1);
+}
+
+.product-wishlist-icon {
+  color: #333;
+  transition: color 0.2s ease;
+}
+
+.product-wishlist-icon--active {
+  fill: #e11d48;
+  color: #e11d48;
+}
+
 .product-overlay {
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0.6);
+  padding: 0.75rem;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.2) 35%, transparent 65%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-end;
-  padding: 2rem 1rem;
-  gap: 1.5rem;
-  animation: fadeIn 0.2s ease;
+  align-items: flex-end;
+  justify-content: center;
 }
 
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
+.product-card:hover .product-overlay {
+  opacity: 1;
 }
 
-/* .add-to-cart-btn {
+.product-quickview-btn {
   width: 100%;
-  background: white;
+  padding: 0.65rem 0;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2);
   color: #111;
-  border: 1px solid white;
-  padding: 0.75rem 1.5rem;
-  border-radius: 6px;
+  border: none;
+  font-size: 0.8rem;
   font-weight: 600;
-  font-size: 0.95rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
   cursor: pointer;
   transition: all 0.2s ease;
-}
-
-.add-to-cart-btn:hover {
-  background: #f5f5f5;
-}
-
-.action-icons {
-  display: flex;
-  gap: 1.5rem;
-}
-
-.icon-btn {
-  background: transparent;
-  border: 1px solid rgba(255, 255, 255, 0.6);
-  color: white;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  padding: 0;
+  gap: 0.4rem;
 }
 
-.icon-btn:hover {
-  background: rgba(255, 255, 255, 0.15);
-  border-color: white;
+.product-quickview-btn:hover {
+  background: rgba(17, 17, 17, 0.9);
+  color: white;
 }
-
-.icon-btn svg {
-  width: 20px;
-  height: 20px;
-  stroke-width: 2;
-} */
 
 /* PRODUCT INFO */
 .product-info {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 0.4rem;
+  padding: 1rem;
+}
+
+.product-category {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #999;
+}
+
+.product-rating {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin-bottom: 0.15rem;
+}
+
+.product-stars {
+  display: flex;
+  gap: 1px;
+}
+
+.product-star {
+  color: #e0e0e0;
+}
+
+.product-star--filled {
+  fill: #fbbf24;
+  color: #fbbf24;
+}
+
+.product-reviews {
+  font-size: 0.7rem;
+  color: #999;
+  font-weight: 500;
+}
+
+.product-price-row {
+  padding-top: 0.5rem;
+  border-top: 1px solid #f0f0f0;
 }
 
 .product-name {
@@ -243,7 +294,7 @@
 
 /* RESPONSIVE - TABLET */
 @media (max-width: 900px) {
-  .products-carousel-container {
+  .features-section {
     padding: 0 1rem;
   }
 
@@ -255,10 +306,6 @@
     flex: 0 0 calc(50% - 0.625rem);
   }
 
-  .features-header {
-    padding: 0 1rem;
-  }
-
   .features-header h2 {
     font-size: 1.6rem;
   }
@@ -268,12 +315,7 @@
 /* RESPONSIVE - MOBILE */
 @media (max-width: 600px) {
   .features-section {
-    padding: 2.5rem 0;
-  }
-
-  .products-carousel-container {
     padding: 0 0.75rem;
-    margin-bottom: 2rem;
   }
 
   .products-carousel-track {
@@ -284,8 +326,24 @@
     flex: 0 0 calc(50% - 0.5rem);
   }
 
+  /* Swipeable carousel: native horizontal scroll instead of the
+     JS-driven transform, so it responds to finger drag directly. */
+  .products-carousel-container--swipe {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+  }
+
+  .products-carousel-container--swipe::-webkit-scrollbar {
+    display: none;
+  }
+
+  .products-carousel-container--swipe .product-card {
+    scroll-snap-align: start;
+  }
+
   .features-header {
-    padding: 0 0.75rem;
     margin-bottom: 2rem;
   }
 
@@ -310,28 +368,34 @@
     padding: 0.3rem 0.6rem;
   }
 
-  .product-overlay {
-    padding: 1.5rem 0.75rem;
-    gap: 1rem;
+  .product-wishlist {
+    padding: 6px;
   }
 
-  .add-to-cart-btn {
-    padding: 0.65rem 1.2rem;
-    font-size: 0.9rem;
+  .product-wishlist-icon {
+    width: 14px;
+    height: 14px;
   }
 
-  .icon-btn {
-    width: 36px;
-    height: 36px;
-  }
-
-  .icon-btn svg {
-    width: 18px;
-    height: 18px;
+  .product-quickview-btn {
+    font-size: 0.7rem;
+    padding: 0.5rem 0;
   }
 
   .product-name {
     font-size: 0.85rem;
+  }
+
+  .product-info {
+    padding: 0.75rem;
+  }
+
+  .product-category {
+    font-size: 0.65rem;
+  }
+
+  .product-reviews {
+    font-size: 0.65rem;
   }
 
   .product-price {
@@ -342,7 +406,7 @@
 
 /* RESPONSIVE - SMALL MOBILE */
 @media (max-width: 400px) {
-  .products-carousel-container {
+  .features-section {
     padding: 0 0.5rem;
   }
 
@@ -355,7 +419,6 @@
   }
 
   .features-header {
-    padding: 0 0.5rem;
     flex-direction: column;
     align-items: flex-start;
     gap: 1rem;

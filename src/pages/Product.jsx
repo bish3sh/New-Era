@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Star, Heart, ShoppingCart, Truck, Check, ChevronRight } from 'lucide-react';
+import { Star, Heart, ShoppingBag, Truck, Check, ChevronRight } from 'lucide-react';
 import './Product.css';
 
 const product = {
@@ -8,7 +8,7 @@ const product = {
   name: 'Shoes Reebok Zig Kinetica 3',
   rating: 4,
   reviews: 42,
-  price: 199.0,
+  price: 1500,
   breadcrumb: ['Clothes and shoes', 'Shoes', 'Reebok'],
   images: [
     'https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?auto=format&fit=crop&q=80&w=800',
@@ -122,7 +122,7 @@ const Product = () => {
             </div>
 
             {/* Price */}
-            <p className="pdp-price">${product.price.toFixed(2)}</p>
+            <p className="pdp-price">Rs. {product.price}</p>
 
             {/* Color — styled after the Catalogue filter drawer's color selector */}
             <div className="pdp-option-block">
@@ -156,7 +156,8 @@ const Product = () => {
             {/* Size — styled after the Catalogue filter drawer's size selector */}
             <div className="pdp-option-block">
               <span className="pdp-option-label">
-                Size <span className="pdp-option-value">EU Men</span>
+                Size 
+                {/* <span className="pdp-option-value">EU Men</span> */}
               </span>
 
               <div className="pdp-size-grid">
@@ -180,7 +181,7 @@ const Product = () => {
             {/* Add to cart row */}
             <div className="pdp-cart-row">
               <button className="pdp-add-to-cart">
-                <ShoppingCart size={16} />
+                <ShoppingBag size={16} />
                 <span>Add to cart</span>
               </button>
               <button
@@ -195,7 +196,7 @@ const Product = () => {
             {/* Delivery note */}
             <div className="pdp-delivery">
               <Truck size={16} className="pdp-delivery-icon" />
-              <span>Free delivery on orders over $30.0</span>
+              <span>Free delivery on orders over Rs. 5000</span>
             </div>
 
           </div>

@@ -5,8 +5,11 @@ import Home from './pages/Home'
 import {Route, Routes } from 'react-router-dom'
 import Catalogue from './pages/Catalogue'
 import Product from './pages/Product'
+import { useScrollToTop } from './hooks/ScrollToTop';
 
 const App = () => {
+  useScrollToTop();
+
   return (
     <div>
       <Navbar />

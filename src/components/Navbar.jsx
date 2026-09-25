@@ -1,11 +1,21 @@
 import React, { useState, useRef, useEffect } from 'react'
 import { Search, Heart, User, ShoppingBag, Menu, X, ChevronDown } from 'lucide-react'
 import './Navbar.css'
+import { Link } from 'react-router-dom'
 
-const navLinks = ['Home', 'New', 'Category', 'Bags', 'Sale',]
+const navLinks = [
+  { name: 'Home', path: '/' },
+  { name: 'New', path: '/new' },
+  { name: 'Category', path: null }, // Category triggers dropdown, no direct link
+  { name: 'Bags', path: '/category/bags' },
+  { name: 'Sale', path: '/sale' },
+]
 
 const categories = [
-  'Heels', 'Sport', 'Dailywear', 'Boots',
+  { name: 'Heels', path: '/category/heels' },
+  { name: 'Sport', path: '/category/sport' },
+  { name: 'Dailywear', path: '/category/dailywear' },
+  { name: 'Boots', path: '/category/boots' },
 ]
 
 const collections = ['Heels', 'Boots']
@@ -15,16 +25,9 @@ const Navbar = () => {
   const [categoryOpen, setCategoryOpen] = useState(false)
   const [searchOpen, setSearchOpen] = useState(false)
   const [dropdownOffset, setDropdownOffset] = useState(14)
-  // The navbar's own height — unlike its on-screen position, this doesn't
-  // change when the slide `transform` animates, so it's safe to measure
-  // once and combine with state (below) instead of racing the animation.
   const [navHeight, setNavHeight] = useState(90)
   const [announcementOpen, setAnnouncementOpen] = useState(true)
-  // Seeded close to the real rendered height so there's no visible jump
-  // before the measurement effect below runs and corrects it.
   const [announcementHeight, setAnnouncementHeight] = useState(36)
-  // Tracks scroll direction: hidden once the user scrolls down at all,
-  // shown again only once they're back at the very top of the page.
   const [scrolledDown, setScrolledDown] = useState(false)
 
   const categoryRef = useRef(null)
@@ -42,13 +45,6 @@ const Navbar = () => {
     return () => document.removeEventListener('mousedown', handleClickOutside)
   }, [])
 
-  // Keep the announcement bar, navbar, and category dropdown measurements
-  // current. Note: this deliberately measures each element's own height
-  // (offsetHeight), not its live on-screen position (getBoundingClientRect
-  // bottom) — offsetHeight is unaffected by the slide `transform`, so these
-  // values stay correct throughout the slide animation with no race
-  // condition. The search panel's actual on-screen position is then derived
-  // from these stable numbers plus `scrolledDown` at render time, below.
   useEffect(() => {
     const updatePositions = () => {
       if (announcementRef.current) {
@@ -61,9 +57,6 @@ const Navbar = () => {
         setNavHeight(Math.round(navRef.current.offsetHeight))
 
         if (categoryRef.current) {
-          // Category dropdown gap: both the navbar and this trigger sit
-          // inside the same transformed element, so their relative offset
-          // is invariant to the slide — getBoundingClientRect is fine here.
           const navRect = navRef.current.getBoundingClientRect()
           const itemRect = categoryRef.current.getBoundingClientRect()
           setDropdownOffset(Math.round(navRect.bottom - itemRect.bottom))
@@ -72,21 +65,13 @@ const Navbar = () => {
     }
 
     updatePositions()
-
-    // Re-measure once web fonts finish swapping in — if the navbar's text
-    // reflows after custom fonts load, the height captured on first paint
-    // goes stale and the search panel top no longer lines up.
     if (document.fonts?.ready) {
       document.fonts.ready.then(updatePositions)
     }
 
-    // Catches any resize (including height-only changes) plus late image loads.
     window.addEventListener('resize', updatePositions)
     window.addEventListener('load', updatePositions)
 
-    // Catches layout shifts window resize won't (font swap without a resize
-    // event, announcement text wrapping to a second line on narrow screens,
-    // etc.) by watching both elements directly.
     const resizeObserver = new ResizeObserver(updatePositions)
     if (navRef.current) resizeObserver.observe(navRef.current)
     if (announcementRef.current) resizeObserver.observe(announcementRef.current)
@@ -98,9 +83,6 @@ const Navbar = () => {
     }
   }, [announcementOpen])
 
-  // Scroll-direction detection: hide the announcement bar the moment the
-  // user scrolls down at all, and only bring it back once they've
-  // scrolled all the way back to the top — not on every scroll-up.
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY
@@ -128,7 +110,7 @@ const Navbar = () => {
           style={{ transform: scrolledDown ? 'translateY(-100%)' : 'translateY(0)' }}
         >
           <span className="announcement-text">
-            Free shipping on all orders above ₹1499
+            Free shipping on all orders above Rs. 5000
           </span>
           {/* <X
             size={14}
@@ -147,17 +129,17 @@ const Navbar = () => {
           transform: scrolledDown ? `translateY(-${announcementHeight}px)` : 'translateY(0)',
         }}
       >
-        <div className="logo">NEW ERA</div>
+        <Link to="/"><div className="logo">NEW ERA</div></Link>
 
         <ul className="nav-links">
-          {navLinks.map((link) =>
-            link === 'Category' ? (
-              <li key={link} className="category-item" ref={categoryRef}>
+          {navLinks.map((item) =>
+            item.name === 'Category' ? (
+              <li key={item.name} className="category-item" ref={categoryRef}>
                 <button
                   className={`category-trigger ${categoryOpen ? 'active' : ''}`}
                   onClick={() => setCategoryOpen((prev) => !prev)}
                 >
-                  {link}
+                  {item.name}
                   <ChevronDown size={14} className="category-chevron" />
                 </button>
 
@@ -165,20 +147,22 @@ const Navbar = () => {
                   className={`category-dropdown ${categoryOpen ? 'open' : ''}`}
                   style={{ '--dropdown-gap': `${dropdownOffset}px` }}
                 >
-                  {categories.map((category) => (
-                    <a
-                      href="#"
-                      key={category}
+                  {categories.map((cat) => (
+                    <Link
+                      to={cat.path}
+                      key={cat.name}
                       className="category-option"
                       onClick={() => setCategoryOpen(false)}
                     >
-                      {category}
-                    </a>
+                      {cat.name}
+                    </Link>
                   ))}
                 </div>
               </li>
             ) : (
-              <li key={link}><a href="#">{link}</a></li>
+              <li key={item.name}>
+                <Link to={item.path}>{item.name}</Link>
+              </li>
             )
           )}
         </ul>
@@ -232,32 +216,34 @@ const Navbar = () => {
         </div>
 
         <ul className="offcanvas-links">
-          {navLinks.map((link) =>
-            link === 'Category' ? (
-              <li key={link} className="offcanvas-category-item">
+          {navLinks.map((item) =>
+            item.name === 'Category' ? (
+              <li key={item.name} className="offcanvas-category-item">
                 <button
                   className={`offcanvas-category-trigger ${categoryOpen ? 'active' : ''}`}
                   onClick={() => setCategoryOpen((prev) => !prev)}
                 >
-                  {link}
+                  {item.name}
                   <ChevronDown size={16} className="offcanvas-category-chevron" />
                 </button>
 
                 <div className={`offcanvas-category-list ${categoryOpen ? 'open' : ''}`}>
-                  {categories.map((category) => (
-                    <a
-                      href="#"
-                      key={category}
+                  {categories.map((cat) => (
+                    <Link
+                      to={cat.path}
+                      key={cat.name}
                       onClick={() => setIsOpen(false)}
                     >
-                      {category}
-                    </a>
+                      {cat.name}
+                    </Link>
                   ))}
                 </div>
               </li>
             ) : (
-              <li key={link}>
-                <a href="#" onClick={() => setIsOpen(false)}>{link}</a>
+              <li key={item.name}>
+                <Link to={item.path} onClick={() => setIsOpen(false)}>
+                  {item.name}
+                </Link>
               </li>
             )
           )}

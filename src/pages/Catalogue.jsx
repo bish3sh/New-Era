@@ -1,4 +1,5 @@
 import React, { useState, useMemo } from 'react';
+import { useNavigate } from 'react-router-dom';
 import {
   SlidersHorizontal,
   X,
@@ -12,14 +13,15 @@ import {
 } from 'lucide-react';
 import './Catalogue.css';
 
+// Product prices in NPR (1000 - 8000 range, no decimals)
 const INITIAL_PRODUCTS = [
   {
     id: 1,
     name: "Quanette Platform Leather Booties",
     category: "Boots",
-    price: 104.30,
-    originalPrice: 149.00,
-    discount: "30% OFF",
+    price: 4800,
+    originalPrice: 6500,
+    discount: "26% OFF",
     badge: "Exclusive",
     rating: 4.8,
     reviews: 195,
@@ -33,9 +35,9 @@ const INITIAL_PRODUCTS = [
     id: 2,
     name: "Noir Heeled Thong Sandals",
     category: "Heels",
-    price: 79.99,
-    originalPrice: 99.00,
-    discount: "20% OFF",
+    price: 2500,
+    originalPrice: 3200,
+    discount: "22% OFF",
     badge: "Exclusive",
     rating: 4.6,
     reviews: 7,
@@ -49,7 +51,7 @@ const INITIAL_PRODUCTS = [
     id: 3,
     name: "Mandey Dress Sandals",
     category: "Heels",
-    price: 99.00,
+    price: 3600,
     originalPrice: null,
     discount: null,
     badge: "Exclusive",
@@ -65,7 +67,7 @@ const INITIAL_PRODUCTS = [
     id: 4,
     name: "Barile Leather Knee-High Boots",
     category: "Boots",
-    price: 129.00,
+    price: 7500,
     originalPrice: null,
     discount: null,
     badge: "New",
@@ -81,9 +83,9 @@ const INITIAL_PRODUCTS = [
     id: 5,
     name: "Aura Metallic Strappy Pump",
     category: "Heels",
-    price: 88.50,
-    originalPrice: 110.00,
-    discount: "20% OFF",
+    price: 3400,
+    originalPrice: 4200,
+    discount: "19% OFF",
     badge: "New",
     rating: 4.7,
     reviews: 42,
@@ -97,9 +99,9 @@ const INITIAL_PRODUCTS = [
     id: 6,
     name: "Velocity Pro Runner Sneakers",
     category: "Sports",
-    price: 115.00,
-    originalPrice: 135.00,
-    discount: "15% OFF",
+    price: 5200,
+    originalPrice: 6000,
+    discount: "13% OFF",
     badge: "Best Seller",
     rating: 4.9,
     reviews: 310,
@@ -113,7 +115,7 @@ const INITIAL_PRODUCTS = [
     id: 7,
     name: "Serene Cushioned Everyday Loafers",
     category: "Dailywear",
-    price: 65.00,
+    price: 1800,
     originalPrice: null,
     discount: null,
     badge: null,
@@ -129,9 +131,9 @@ const INITIAL_PRODUCTS = [
     id: 8,
     name: "Monogram Structured Tote Bag",
     category: "Bags",
-    price: 145.00,
-    originalPrice: 180.00,
-    discount: "20% OFF",
+    price: 6800,
+    originalPrice: 7900,
+    discount: "14% OFF",
     badge: "Limited",
     rating: 4.9,
     reviews: 54,
@@ -157,6 +159,7 @@ const COLORS = [
 ];
 
 export default function Catalogue() {
+  const navigate = useNavigate();
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [sortBy, setSortBy] = useState('featured');
   const [wishlist, setWishlist] = useState([]);
@@ -166,9 +169,8 @@ export default function Catalogue() {
   const [selectedSizes, setSelectedSizes] = useState([]);
   const [selectedColors, setSelectedColors] = useState([]);
   const [selectedHeelHeights, setSelectedHeelHeights] = useState([]);
-  const [maxPrice, setMaxPrice] = useState(200);
+  const [maxPrice, setMaxPrice] = useState(8000);
 
-  // Accordion open states inside drawer
   const [openAccordion, setOpenAccordion] = useState({
     category: true,
     size: true,
@@ -181,10 +183,17 @@ export default function Catalogue() {
     setOpenAccordion(prev => ({ ...prev, [key]: !prev[key] }));
   };
 
-  const toggleWishlist = (productId) => {
+  // Prevent event bubbling so clicking the favorite button doesn't trigger card navigation
+  const toggleWishlist = (e, productId) => {
+    e.stopPropagation();
     setWishlist(prev =>
       prev.includes(productId) ? prev.filter(id => id !== productId) : [...prev, productId]
     );
+  };
+
+  const handleCardClick = (productId) => {
+    navigate(`/product`);
+    // navigate(`/product/${productId}`);
   };
 
   const handleCategoryToggle = (cat) => {
@@ -216,12 +225,11 @@ export default function Catalogue() {
     setSelectedSizes([]);
     setSelectedColors([]);
     setSelectedHeelHeights([]);
-    setMaxPrice(200);
+    setMaxPrice(8000);
   };
 
-  const activeFilterCount = selectedCategories.length + selectedSizes.length + selectedColors.length + selectedHeelHeights.length + (maxPrice < 200 ? 1 : 0);
+  const activeFilterCount = selectedCategories.length + selectedSizes.length + selectedColors.length + selectedHeelHeights.length + (maxPrice < 8000 ? 1 : 0);
 
-  // Computed Filtered & Sorted Products
   const filteredProducts = useMemo(() => {
     return INITIAL_PRODUCTS.filter(product => {
       if (selectedCategories.length > 0 && !selectedCategories.includes(product.category)) return false;
@@ -234,7 +242,7 @@ export default function Catalogue() {
       if (sortBy === 'price-low') return a.price - b.price;
       if (sortBy === 'price-high') return b.price - a.price;
       if (sortBy === 'rating') return b.rating - a.rating;
-      return a.id - b.id; // Default Featured
+      return a.id - b.id;
     });
   }, [selectedCategories, selectedSizes, selectedColors, selectedHeelHeights, maxPrice, sortBy]);
 
@@ -245,7 +253,6 @@ export default function Catalogue() {
       <div className="catalogue-toolbar">
         <div className="catalogue-container catalogue-toolbar-inner">
 
-          {/* Left: Filter Toggle Button */}
           <button
             onClick={() => setIsDrawerOpen(true)}
             className="catalogue-filter-btn"
@@ -262,7 +269,6 @@ export default function Catalogue() {
             )}
           </button>
 
-          {/* Right: Sort Dropdown */}
           <div className="catalogue-sort">
             <span className="catalogue-sort-label">Sort by</span>
             <div className="catalogue-select-wrap">
@@ -294,7 +300,6 @@ export default function Catalogue() {
       {/* Drawer Panel */}
       <aside className={`catalogue-drawer ${isDrawerOpen ? 'catalogue-drawer--open' : ''}`}>
 
-        {/* Drawer Header */}
         <div className="catalogue-drawer-header">
           <div className="catalogue-drawer-header-title">
             <SlidersHorizontal className="catalogue-drawer-header-icon" />
@@ -309,7 +314,6 @@ export default function Catalogue() {
           </button>
         </div>
 
-        {/* Drawer Scrollable Content */}
         <div className="catalogue-drawer-body">
 
           {/* Category Filter */}
@@ -430,13 +434,13 @@ export default function Catalogue() {
             )}
           </div>
 
-          {/* Price Range Filter */}
+          {/* Price Filter Range */}
           <div className="catalogue-accordion">
             <button
               onClick={() => toggleAccordion('price')}
               className="catalogue-accordion-trigger"
             >
-              <span>Max Price: ${maxPrice}</span>
+              <span>Max Price: Rs. {maxPrice.toLocaleString()}</span>
               <ChevronDown className={`catalogue-accordion-chevron ${openAccordion.price ? 'catalogue-accordion-chevron--open' : ''}`} />
             </button>
 
@@ -444,16 +448,16 @@ export default function Catalogue() {
               <div className="catalogue-range-wrap">
                 <input
                   type="range"
-                  min="50"
-                  max="200"
-                  step="5"
+                  min="1000"
+                  max="8000"
+                  step="200"
                   value={maxPrice}
                   onChange={(e) => setMaxPrice(Number(e.target.value))}
                   className="catalogue-range"
                 />
                 <div className="catalogue-range-labels">
-                  <span>$50</span>
-                  <span>${maxPrice}</span>
+                  <span>Rs. 1,000</span>
+                  <span>Rs. {maxPrice.toLocaleString()}</span>
                 </div>
               </div>
             )}
@@ -461,7 +465,6 @@ export default function Catalogue() {
 
         </div>
 
-        {/* Drawer Sticky Footer Actions */}
         <div className="catalogue-drawer-footer">
           <button
             onClick={clearAllFilters}
@@ -483,7 +486,6 @@ export default function Catalogue() {
       {/* Main Content */}
       <main className="catalogue-container catalogue-main">
 
-        {/* Active Filter Chips Bar */}
         {activeFilterCount > 0 && (
           <div className="catalogue-chips">
             <span className="catalogue-chips-label">Active Filters:</span>
@@ -509,6 +511,13 @@ export default function Catalogue() {
               </span>
             ))}
 
+            {maxPrice < 8000 && (
+              <span className="catalogue-chip">
+                Under Rs. {maxPrice.toLocaleString()}
+                <X className="catalogue-chip-close" onClick={() => setMaxPrice(8000)} />
+              </span>
+            )}
+
             <button
               onClick={clearAllFilters}
               className="catalogue-chips-clear"
@@ -518,7 +527,6 @@ export default function Catalogue() {
           </div>
         )}
 
-        {/* Product Grid / Empty State */}
         {filteredProducts.length === 0 ? (
           <div className="catalogue-empty">
             <Sparkles className="catalogue-empty-icon" />
@@ -538,9 +546,13 @@ export default function Catalogue() {
               const isWishlisted = wishlist.includes(product.id);
 
               return (
-                <div key={product.id} className="catalogue-card">
+                <div
+                  key={product.id}
+                  className="catalogue-card"
+                  onClick={() => handleCardClick(product.id)}
+                  style={{ cursor: 'pointer' }}
+                >
 
-                  {/* Image & Overlay Container */}
                   <div className="catalogue-card-image-wrap">
                     <img
                       src={product.image}
@@ -548,44 +560,37 @@ export default function Catalogue() {
                       className="catalogue-card-image"
                     />
 
-                    {/* Badge */}
                     {product.badge && (
                       <span className="catalogue-badge">
                         {product.badge}
                       </span>
                     )}
 
-                    {/* Wishlist Button */}
                     <button
-                      onClick={() => toggleWishlist(product.id)}
+                      onClick={(e) => toggleWishlist(e, product.id)}
                       className="catalogue-card-wishlist"
                       aria-label="Add to wishlist"
                     >
                       <Heart className={`catalogue-card-wishlist-icon ${isWishlisted ? 'catalogue-card-wishlist-icon--active' : ''}`} />
                     </button>
 
-                    {/* Hover Quick View Overlay */}
                     <div className="catalogue-card-overlay">
-                      <button className="catalogue-quickview-btn">
-                        <span>Quick View</span>
+                      <span className="catalogue-quickview-btn">
+                        <span>View Product</span>
                         <ArrowRight className="catalogue-quickview-icon" />
-                      </button>
+                      </span>
                     </div>
                   </div>
 
-                  {/* Card Content & Details */}
                   <div className="catalogue-card-body">
-                    {/* Category Label */}
                     <span className="catalogue-card-category">
                       {product.category}
                     </span>
 
-                    {/* Title */}
                     <h3 className="catalogue-card-title">
                       {product.name}
                     </h3>
 
-                    {/* Ratings */}
                     <div className="catalogue-card-rating">
                       <div className="catalogue-card-stars">
                         {[...Array(5)].map((_, i) => (
@@ -598,14 +603,13 @@ export default function Catalogue() {
                       <span className="catalogue-card-reviews">({product.reviews})</span>
                     </div>
 
-                    {/* Pricing Display */}
                     <div className="catalogue-card-price-row">
                       <span className="catalogue-card-price">
-                        ${product.price.toFixed(2)}
+                        Rs. {product.price.toLocaleString()}
                       </span>
                       {product.originalPrice && (
                         <span className="catalogue-card-price-original">
-                          ${product.originalPrice.toFixed(2)}
+                          Rs. {product.originalPrice.toLocaleString()}
                         </span>
                       )}
                     </div>

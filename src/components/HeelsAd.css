@@ -24,12 +24,15 @@
   align-items: center;
   justify-content: flex-end;
   padding: 3rem 7.75rem;
+  z-index: 1; /* Ensures overlay sits clearly on top of the background */
 }
 
 .heels-ad-content {
   color: white;
   max-width: 400px;
   text-align: left;
+  position: relative;
+  z-index: 2; /* Elevates text & button container */
 }
 
 .heels-ad-content h2 {
@@ -48,6 +51,9 @@
 }
 
 .heels-ad-btn {
+  position: relative;
+  z-index: 10; /* Guarantees the button catches click events */
+  pointer-events: auto; /* Forces interactive clicks */
   background: white;
   color: black;
   padding: 0.75rem 1.5rem;
@@ -58,8 +64,7 @@
   text-transform: uppercase;
   transition: transform 0.3s ease-in-out, background-color 0.3s ease-in-out, color 0.3s ease-in-out;
   backdrop-filter: blur(12px);
-    font-family: "Encode Sans Expanded",sans-serif ;
-
+  font-family: "Encode Sans Expanded", sans-serif;
 }
 
 .heels-ad-btn:hover {

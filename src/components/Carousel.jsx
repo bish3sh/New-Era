@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import './Carousel.css';
+import { useNavigate } from 'react-router-dom';
 
 
 function CarouselCard({ image, title, subtitle }) {
 
+  const navigate = useNavigate();
   return (
     <div className="carousel-card">
       <div className="carousel-card-image" style={{ backgroundImage: `url(${image})` }}>
@@ -14,7 +16,9 @@ function CarouselCard({ image, title, subtitle }) {
           <p className="carousel-subtitle">Fresh styles for you to check out</p>
           {/* {subtitle && <p className="carousel-meta">{subtitle}</p>} */}
           <div className="carousel-actions">
-            <button className="shop-btn">Shop now</button>
+            <button className="shop-btn" onClick={() => navigate('/new')}>
+              Shop now
+            </button>
             {/* <button className="view-more-btn">View More</button> */}
           </div>
         </div>

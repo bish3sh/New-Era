@@ -1,8 +1,10 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Heart, ArrowRight, Star, ChevronLeft, ChevronRight } from 'lucide-react';
 import './Features.css';
 
 const Features = () => {
+  const navigate = useNavigate();
   const [wishlist, setWishlist] = useState([]);
   const [currentSlide, setCurrentSlide] = useState(0);
   const [cardWidth, setCardWidth] = useState(0);
@@ -17,7 +19,7 @@ const Features = () => {
       name: 'Adidas 01-F22',
       category: 'Sneakers',
       image: 'https://images.unsplash.com/photo-1605732440685-d0654d81aa30?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-      price: '14,990.00',
+      price: '4,990',
       rating: 4.6,
       reviews: 82,
       isNew: true,
@@ -27,7 +29,7 @@ const Features = () => {
       name: 'Adidas 01-F23',
       category: 'Sneakers',
       image: 'https://images.unsplash.com/photo-1605733160314-4fc7dac4bb16?q=80&w=1190&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-      price: '14,990.00',
+      price: '5,490',
       rating: 4.8,
       reviews: 47,
       isNew: true,
@@ -37,7 +39,7 @@ const Features = () => {
       name: 'Adidas 01-F24',
       category: 'Running',
       image: 'https://images.unsplash.com/photo-1631087606988-a6be38fccaf6?q=80&w=1127&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-      price: '14,990.00',
+      price: '3,990',
       rating: 4.5,
       reviews: 63,
       isNew: true,
@@ -47,7 +49,7 @@ const Features = () => {
       name: 'Adidas 01-F25',
       category: 'Running',
       image: 'https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?q=80&w=1025&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-      price: '24,890.00',
+      price: '7,890',
       rating: 4.9,
       reviews: 128,
       isNew: true,
@@ -57,7 +59,7 @@ const Features = () => {
       name: 'Adidas 01-F26',
       category: 'Lifestyle',
       image: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400&h=400&fit=crop',
-      price: '16,990.00',
+      price: '6,490',
       rating: 4.4,
       reviews: 35,
       isNew: true,
@@ -67,14 +69,13 @@ const Features = () => {
       name: 'Adidas 01-F27',
       category: 'Lifestyle',
       image: 'https://images.unsplash.com/photo-1534653299134-96a171b61581?q=80&w=975&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-      price: '18,490.00',
+      price: '5,890',
       rating: 4.7,
       reviews: 91,
       isNew: true,
     },
   ];
 
-  // Calculate visible cards based on screen size
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth <= 400) {
@@ -86,8 +87,6 @@ const Features = () => {
       } else {
         setVisibleCards(4);
       }
-      // Below 600px the carousel becomes a native swipeable strip —
-      // no arrow buttons, no JS-driven transform, just finger scrolling.
       setIsMobile(window.innerWidth <= 600);
     };
 
@@ -96,7 +95,6 @@ const Features = () => {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  // Calculate card width (including gap)
   useEffect(() => {
     if (containerRef.current) {
       const container = containerRef.current;
@@ -109,10 +107,16 @@ const Features = () => {
 
   const maxSlide = Math.max(0, products.length - visibleCards);
 
-  const toggleWishlist = (productId) => {
+  const toggleWishlist = (e, productId) => {
+    e.stopPropagation();
     setWishlist((prev) =>
       prev.includes(productId) ? prev.filter((id) => id !== productId) : [...prev, productId]
     );
+  };
+
+  const handleCardClick = (productId) => {
+     navigate(`/product`);
+    // navigate(`/product/${productId}`);
   };
 
   const handlePrev = () => {
@@ -123,7 +127,6 @@ const Features = () => {
     setCurrentSlide((prev) => Math.min(maxSlide, prev + 1));
   };
 
-  // Calculate translation
   const translateValue = -currentSlide * cardWidth;
 
   return (
@@ -151,7 +154,7 @@ const Features = () => {
               </button>
             </>
           )}
-          <button className="view-all-btn-header">View All</button>
+          <button className="view-all-btn-header"  onClick={() => navigate('/new')}>View All</button>
         </div>
       </div>
 
@@ -170,7 +173,12 @@ const Features = () => {
             const isWishlisted = wishlist.includes(product.id);
 
             return (
-              <div key={product.id} className="product-card">
+              <div
+                key={product.id}
+                className="product-card"
+                onClick={() => handleCardClick(product.id)}
+                style={{ cursor: 'pointer' }}
+              >
                 <div className="product-image-wrapper">
                   <img
                     src={product.image}
@@ -182,7 +190,7 @@ const Features = () => {
 
                   <button
                     className="product-wishlist"
-                    onClick={() => toggleWishlist(product.id)}
+                    onClick={(e) => toggleWishlist(e, product.id)}
                     aria-label="Add to wishlist"
                   >
                     <Heart
@@ -192,10 +200,10 @@ const Features = () => {
                   </button>
 
                   <div className="product-overlay">
-                    <button className="product-quickview-btn">
-                      <span>Quick View</span>
+                    <span className="product-quickview-btn">
+                      <span>View Product</span>
                       <ArrowRight size={14} className="product-quickview-icon" />
-                    </button>
+                    </span>
                   </div>
                 </div>
 

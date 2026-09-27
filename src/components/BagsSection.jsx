@@ -1,8 +1,10 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Heart, ArrowRight, Star, ChevronLeft, ChevronRight } from 'lucide-react';
 import './BagsSection.css';
 
 const BagsSection = () => {
+  const navigate = useNavigate();
   const [wishlist, setWishlist] = useState([]);
   const [currentSlide, setCurrentSlide] = useState(0);
   const [cardWidth, setCardWidth] = useState(0);
@@ -17,7 +19,7 @@ const BagsSection = () => {
       name: 'Leather Backpack 01',
       category: 'Backpacks',
       image: 'https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=400&h=400&fit=crop',
-      price: '8,990.00',
+      price: '5,990',
       rating: 4.6,
       reviews: 58,
       isBag: true,
@@ -27,7 +29,7 @@ const BagsSection = () => {
       name: 'Canvas Tote Bag',
       category: 'Totes',
       image: 'https://images.unsplash.com/photo-1590874103328-eac38a683ce7?w=400&h=400&fit=crop',
-      price: '4,500.00',
+      price: '2,500',
       rating: 4.4,
       reviews: 33,
       isBag: true,
@@ -37,7 +39,7 @@ const BagsSection = () => {
       name: 'Travel Duffel Bag',
       category: 'Travel',
       image: 'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=400&h=400&fit=crop',
-      price: '12,490.00',
+      price: '7,490',
       rating: 4.8,
       reviews: 71,
       isBag: true,
@@ -47,7 +49,7 @@ const BagsSection = () => {
       name: 'Classic Crossbody',
       category: 'Crossbody',
       image: 'https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=400&h=400&fit=crop',
-      price: '6,890.00',
+      price: '3,890',
       rating: 4.5,
       reviews: 45,
       isBag: true,
@@ -57,7 +59,7 @@ const BagsSection = () => {
       name: 'Urban Messenger Bag',
       category: 'Messenger',
       image: 'https://images.unsplash.com/photo-1590874103328-eac38a683ce7?w=400&h=400&fit=crop',
-      price: '9,990.00',
+      price: '6,990',
       rating: 4.7,
       reviews: 62,
       isBag: true,
@@ -67,14 +69,13 @@ const BagsSection = () => {
       name: 'Sport Gym Bag',
       category: 'Sport',
       image: 'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=400&h=400&fit=crop',
-      price: '5,490.00',
+      price: '3,490',
       rating: 4.3,
       reviews: 29,
       isBag: true,
     },
   ];
 
-  // Calculate visible cards based on screen size
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth <= 400) {
@@ -86,8 +87,6 @@ const BagsSection = () => {
       } else {
         setVisibleCards(4);
       }
-      // Below 600px the carousel becomes a native swipeable strip —
-      // no arrow buttons, no JS-driven transform, just finger scrolling.
       setIsMobile(window.innerWidth <= 600);
     };
 
@@ -108,10 +107,16 @@ const BagsSection = () => {
 
   const maxSlide = Math.max(0, products.length - visibleCards);
 
-  const toggleWishlist = (productId) => {
+  const toggleWishlist = (e, productId) => {
+    e.stopPropagation();
     setWishlist((prev) =>
       prev.includes(productId) ? prev.filter((id) => id !== productId) : [...prev, productId]
     );
+  };
+
+  const handleCardClick = (productId) => {
+     navigate(`/product`);
+    // navigate(`/product/${productId}`);
   };
 
   const handlePrev = () => {
@@ -149,7 +154,7 @@ const BagsSection = () => {
               </button>
             </>
           )}
-          <button className="bags-view-all-btn-header">View All</button>
+          <button className="bags-view-all-btn-header"  onClick={() => navigate('/new')}>View All</button>
         </div>
       </div>
 
@@ -168,7 +173,12 @@ const BagsSection = () => {
             const isWishlisted = wishlist.includes(product.id);
 
             return (
-              <div key={product.id} className="bags-card">
+              <div
+                key={product.id}
+                className="bags-card"
+                onClick={() => handleCardClick(product.id)}
+                style={{ cursor: 'pointer' }}
+              >
                 <div className="bags-image-wrapper">
                   <img
                     src={product.image}
@@ -180,7 +190,7 @@ const BagsSection = () => {
 
                   <button
                     className="bags-wishlist"
-                    onClick={() => toggleWishlist(product.id)}
+                    onClick={(e) => toggleWishlist(e, product.id)}
                     aria-label="Add to wishlist"
                   >
                     <Heart
@@ -190,10 +200,10 @@ const BagsSection = () => {
                   </button>
 
                   <div className="bags-overlay">
-                    <button className="bags-quickview-btn">
-                      <span>Quick View</span>
+                    <span className="bags-quickview-btn">
+                      <span>View Product</span>
                       <ArrowRight size={14} className="bags-quickview-icon" />
-                    </button>
+                    </span>
                   </div>
                 </div>
 

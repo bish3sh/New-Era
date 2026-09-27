@@ -1,8 +1,10 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Heart, ArrowRight, Star, ChevronLeft, ChevronRight } from 'lucide-react';
 import './TopSelling.css';
 
 const TopSelling = () => {
+  const navigate = useNavigate();
   const [wishlist, setWishlist] = useState([]);
   const [currentSlide, setCurrentSlide] = useState(0);
   const [cardWidth, setCardWidth] = useState(0);
@@ -17,7 +19,7 @@ const TopSelling = () => {
       name: 'Adidas 01-F22',
       category: 'Sneakers',
       image: 'https://images.unsplash.com/photo-1605733513549-de9b150bd70d?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-      price: '14,990.00',
+      price: '4,500',
       rating: 4.7,
       reviews: 143,
       isTopSelling: true,
@@ -27,7 +29,7 @@ const TopSelling = () => {
       name: 'Adidas 01-F23',
       category: 'Sneakers',
       image: 'https://images.unsplash.com/photo-1535043934128-cf0b28d52f95?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-      price: '14,990.00',
+      price: '5,200',
       rating: 4.6,
       reviews: 98,
       isTopSelling: true,
@@ -37,7 +39,7 @@ const TopSelling = () => {
       name: 'Adidas 01-F24',
       category: 'Running',
       image: 'https://images.unsplash.com/photo-1662138679794-110b0cba27b9?q=80&w=1074&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-      price: '14,990.00',
+      price: '3,800',
       rating: 4.9,
       reviews: 211,
       isTopSelling: true,
@@ -47,7 +49,7 @@ const TopSelling = () => {
       name: 'Adidas 01-F25',
       category: 'Running',
       image: 'https://images.unsplash.com/photo-1522056683100-34f2f60f0094?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-      price: '24,890.00',
+      price: '7,500',
       rating: 4.8,
       reviews: 176,
       isTopSelling: true,
@@ -57,7 +59,7 @@ const TopSelling = () => {
       name: 'Adidas 01-F26',
       category: 'Lifestyle',
       image: 'https://images.unsplash.com/photo-1584473457417-bd0afe798ae1?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-      price: '16,990.00',
+      price: '6,200',
       rating: 4.5,
       reviews: 67,
       isTopSelling: true,
@@ -67,14 +69,13 @@ const TopSelling = () => {
       name: 'Adidas 01-F27',
       category: 'Lifestyle',
       image: 'https://images.unsplash.com/photo-1741783895531-ccc860eb946a?q=80&w=1025&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-      price: '18,490.00',
+      price: '5,900',
       rating: 4.6,
       reviews: 84,
       isTopSelling: true,
     },
   ];
 
-  // Calculate visible cards based on screen size
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth <= 400) {
@@ -86,8 +87,6 @@ const TopSelling = () => {
       } else {
         setVisibleCards(4);
       }
-      // Below 600px the carousel becomes a native swipeable strip —
-      // no arrow buttons, no JS-driven transform, just finger scrolling.
       setIsMobile(window.innerWidth <= 600);
     };
 
@@ -108,10 +107,16 @@ const TopSelling = () => {
 
   const maxSlide = Math.max(0, products.length - visibleCards);
 
-  const toggleWishlist = (productId) => {
+  const toggleWishlist = (e, productId) => {
+    e.stopPropagation();
     setWishlist((prev) =>
       prev.includes(productId) ? prev.filter((id) => id !== productId) : [...prev, productId]
     );
+  };
+
+  const handleCardClick = (productId) => {
+     navigate(`/product`);
+    // navigate(`/product/${productId}`);
   };
 
   const handlePrev = () => {
@@ -149,7 +154,9 @@ const TopSelling = () => {
               </button>
             </>
           )}
-          <button className="top-selling-view-all-btn-header">View All</button>
+          <button className="top-selling-view-all-btn-header" onClick={() => navigate('/new')}>
+            View All
+          </button>
         </div>
       </div>
 
@@ -168,7 +175,12 @@ const TopSelling = () => {
             const isWishlisted = wishlist.includes(product.id);
 
             return (
-              <div key={product.id} className="top-selling-card">
+              <div
+                key={product.id}
+                className="top-selling-card"
+                onClick={() => handleCardClick(product.id)}
+                style={{ cursor: 'pointer' }}
+              >
                 <div className="top-selling-image-wrapper">
                   <img
                     src={product.image}
@@ -180,7 +192,7 @@ const TopSelling = () => {
 
                   <button
                     className="top-selling-wishlist"
-                    onClick={() => toggleWishlist(product.id)}
+                    onClick={(e) => toggleWishlist(e, product.id)}
                     aria-label="Add to wishlist"
                   >
                     <Heart
@@ -190,10 +202,10 @@ const TopSelling = () => {
                   </button>
 
                   <div className="top-selling-overlay">
-                    <button className="top-selling-quickview-btn">
-                      <span>Quick View</span>
+                    <span className="top-selling-quickview-btn">
+                      <span>View Product</span>
                       <ArrowRight size={14} className="top-selling-quickview-icon" />
-                    </button>
+                    </span>
                   </div>
                 </div>
 

@@ -260,7 +260,7 @@ export default function Catalogue() {
             <SlidersHorizontal className="catalogue-filter-icon" />
             <span>FILTER</span>
             <span className="catalogue-filter-count">
-              ({filteredProducts.length} {filteredProducts.length === 1 ? 'item' : 'products'})
+              ({filteredProducts.length} {filteredProducts.length === 1 ? 'item' : 'items'})
             </span>
             {activeFilterCount > 0 && (
               <span className="catalogue-filter-badge">

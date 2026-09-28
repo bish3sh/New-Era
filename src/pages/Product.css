@@ -529,7 +529,7 @@
   letter-spacing: 0.03em;
   text-transform: uppercase;
   padding: 0.75rem 1.75rem;
-  border-radius: 999px;
+  /* border-radius: 999px; */
   cursor: pointer;
   transition: all 0.2s ease;
   margin-left: auto;
@@ -669,17 +669,27 @@
   row-gap: 2.5rem;
 }
 
-@media (min-width: 640px) {
+@media (min-width: 768px) {
+  .pdp-related-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
   .pdp-related-grid {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 
-@media (min-width: 1024px) {
+@media (max-width: 400px) {
   .pdp-related-grid {
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(2, 1fr);
   }
 }
+
+
+
+
 
 .pdp-related-card {
   display: flex;
@@ -858,4 +868,10 @@
   color: #999;
   text-decoration: line-through;
   font-weight: 400;
+}
+
+@media (max-width:600px){
+  .pdp-section{
+    padding: 6rem 0 2rem;
+  }
 }

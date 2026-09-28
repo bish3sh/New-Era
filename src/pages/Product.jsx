@@ -146,7 +146,7 @@ const Product = () => {
       <div className="pdp-container">
 
         {/* Breadcrumb */}
-        <nav className="pdp-breadcrumb" aria-label="Breadcrumb">
+        {/* <nav className="pdp-breadcrumb" aria-label="Breadcrumb">
           {product.breadcrumb.map((crumb, i) => (
             <span key={crumb} className="pdp-breadcrumb-item">
               {crumb}
@@ -155,7 +155,7 @@ const Product = () => {
               )}
             </span>
           ))}
-        </nav>
+        </nav> */}
 
         <div className="pdp-layout">
 

@@ -20,9 +20,31 @@ const categories = [
 
 const collections = ['Heels', 'Boots']
 
+// Set this to an image URL once users have a profile photo. Until then the
+// avatar shows a placeholder user icon inside the same circle.
+const userAvatar = null
+
+const Avatar = ({ size = 32, className = '' }) => (
+  <button
+    className={`avatar ${className}`}
+    style={{ width: size, height: size }}
+    aria-label="Account"
+  >
+    {userAvatar ? (
+      <img src={userAvatar} alt="Your account" className="avatar-img" />
+    ) : (
+      <User size={Math.round(size * 0.5)} />
+    )}
+  </button>
+)
+
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false)
   const [categoryOpen, setCategoryOpen] = useState(false)
+  // Mobile menu accordion has its own state — it shares nothing with the
+  // desktop dropdown, whose outside-click handler would otherwise treat a
+  // tap on the offcanvas Category button as "outside" and fight the toggle.
+  const [offcanvasCategoryOpen, setOffcanvasCategoryOpen] = useState(false)
   const [searchOpen, setSearchOpen] = useState(false)
   const [dropdownOffset, setDropdownOffset] = useState(14)
   const [navHeight, setNavHeight] = useState(90)
@@ -169,9 +191,9 @@ const Navbar = () => {
 
         <div className="navbar-right">
           <Search size={22} className="navbar-icon" onClick={() => setSearchOpen(true)} />
-          <Heart size={24} className="navbar-icon" />
-          <ShoppingBag size={24} className="navbar-icon" />
-          <User size={24} className="navbar-icon" />
+          <Heart size={24} className="navbar-icon navbar-icon--desktop" />
+          <ShoppingBag size={24} className="navbar-icon navbar-icon--desktop" />
+          <Avatar size={32} className="navbar-icon--desktop" />
           <Menu size={24} className="navbar-icon menu-toggle" onClick={() => setIsOpen(true)} />
         </div>
       </nav>
@@ -212,6 +234,7 @@ const Navbar = () => {
       />
       <div className={`offcanvas ${isOpen ? 'open' : ''}`}>
         <div className="offcanvas-header">
+          <Avatar size={36} />
           <X size={24} className="close-icon" onClick={() => setIsOpen(false)} />
         </div>
 
@@ -220,14 +243,14 @@ const Navbar = () => {
             item.name === 'Category' ? (
               <li key={item.name} className="offcanvas-category-item">
                 <button
-                  className={`offcanvas-category-trigger ${categoryOpen ? 'active' : ''}`}
-                  onClick={() => setCategoryOpen((prev) => !prev)}
+                  className={`offcanvas-category-trigger ${offcanvasCategoryOpen ? 'active' : ''}`}
+                  onClick={() => setOffcanvasCategoryOpen((prev) => !prev)}
                 >
                   {item.name}
                   <ChevronDown size={16} className="offcanvas-category-chevron" />
                 </button>
 
-                <div className={`offcanvas-category-list ${categoryOpen ? 'open' : ''}`}>
+                <div className={`offcanvas-category-list ${offcanvasCategoryOpen ? 'open' : ''}`}>
                   {categories.map((cat) => (
                     <Link
                       to={cat.path}
@@ -248,6 +271,19 @@ const Navbar = () => {
             )
           )}
         </ul>
+
+        {/* Account actions — these live in the navbar on desktop, and move
+            here on mobile where the navbar only has room for search + menu */}
+        <div className="offcanvas-actions">
+          <button className="offcanvas-action">
+            <Heart size={20} />
+            <span>Favorites</span>
+          </button>
+          <button className="offcanvas-action">
+            <ShoppingBag size={20} />
+            <span>Shopping Bag</span>
+          </button>
+        </div>
       </div>
     </div>
   )

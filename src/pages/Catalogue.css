@@ -1,10 +1,15 @@
 /* CATALOGUE PAGE */
 .catalogue {
+  /* Height of the fixed header (announcement bar + navbar).
+     Set --catalogue-header-height from JS if you want it measured exactly;
+     otherwise the fallback below is used. */
+  --catalogue-header-fallback: 115px;
+
   min-height: 100vh;
   background: #fafafa;
   color: #171717;
   font-family: ui-sans-serif, system-ui, -apple-system, sans-serif;
-  padding-top: 115px;
+  padding-top: var(--catalogue-header-height, var(--catalogue-header-fallback));
 }
 
 .catalogue ::selection {
@@ -22,10 +27,6 @@
 
 /* TABLET */
 @media (max-width: 1023px) {
-  .catalogue {
-    padding-top: 75px;
-  }
-
   .catalogue-container {
     padding: 0 1.25rem;
   }
@@ -34,7 +35,7 @@
 /* MOBILE */
 @media (max-width: 600px) {
   .catalogue {
-    padding-top: 70px;
+    --catalogue-header-fallback: 88px;
   }
 
   .catalogue-container {
@@ -49,12 +50,24 @@
 }
 
 .catalogue-toolbar-inner {
-  padding: 1rem 2rem;
+  padding: 1rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
   gap: 1rem;
+}
+
+@media (min-width: 640px) {
+  .catalogue-toolbar-inner {
+    padding: 1rem 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .catalogue-toolbar-inner {
+    padding: 1rem 2rem;
+  }
 }
 
 .catalogue-filter-btn {
@@ -66,6 +79,7 @@
   text-transform: uppercase;
   font-weight: 600;
   padding: 0.625rem 1.25rem;
+  white-space: nowrap;
   background: white;
   border: 1px solid #d4d4d4;
   cursor: pointer;
@@ -175,6 +189,9 @@
 }
 
 @media (max-width: 600px) {
+
+  
+
   .catalogue-toolbar-inner {
     padding: 0.75rem;
     gap: 0.75rem;
@@ -205,6 +222,16 @@
   }
 }
 
+@media (max-width: 360px) {
+  .catalogue-filter-count {
+    display: none;
+  }
+
+  .catalogue-filter-btn {
+    letter-spacing: 0.06em;
+  }
+}
+
 
 
 /* BACKDROP */
@@ -224,7 +251,9 @@
   top: 0;
   left: 0;
   height: 100%;
+  height: 100dvh;
   width: 100%;
+  max-width: 100%;
   background: white;
   z-index: 50;
   box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
@@ -294,6 +323,7 @@
 .catalogue-drawer-body {
   flex: 1;
   overflow-y: auto;
+  overscroll-behavior: contain;
   padding: 1.5rem;
   display: flex;
   flex-direction: column;
@@ -688,6 +718,12 @@
   height: 1rem;
 }
 
+@media (max-width: 600px) {
+  .catalogue-empty {
+    padding: 3rem 1rem;
+  }
+}
+
 
 /* PRODUCT GRID */
 .catalogue-grid {
@@ -861,6 +897,7 @@
 .catalogue-card-body {
   display: flex;
   flex-direction: column;
+  flex: 1;
   gap: 0.4rem;
   padding: 1rem;
 }
@@ -915,11 +952,13 @@
 }
 
 .catalogue-card-price-row {
+  margin-top: auto;
   padding-top: 0.5rem;
   border-top: 1px solid #f0f0f0;
   display: flex;
+  flex-wrap: wrap;
   align-items: baseline;
-  gap: 0.5rem;
+  gap: 0.25rem 0.5rem;
 }
 
 .catalogue-card-price {
@@ -948,6 +987,11 @@
   .catalogue-card-title {
     font-size: 0.75rem;
     line-height: 1.3;
+    white-space: normal;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
   }
 
   .catalogue-card-rating {
@@ -994,6 +1038,22 @@
     height: 0.8rem;
   }
 
+  .catalogue-card:hover {
+    transform: none;
+    box-shadow: none;
+  }
+
+  .catalogue-card:hover .catalogue-card-image {
+    transform: none;
+  }
+
+  .catalogue-card:hover .catalogue-card-overlay {
+    opacity: 0;
+  }
+}
+
+/* TOUCH DEVICES - no sticky hover effects on tablets */
+@media (hover: none) {
   .catalogue-card:hover {
     transform: none;
     box-shadow: none;

@@ -76,7 +76,7 @@
 /* RESPONSIVE - TABLET */
 @media (max-width: 900px) {
   .heels-ad {
-    height: 350px;
+    height: 400px;
   }
 
   .heels-ad-overlay {
@@ -101,7 +101,7 @@
 /* RESPONSIVE - MOBILE */
 @media (max-width: 600px) {
   .heels-ad {
-    height: 300px;
+    height: 400px;
     margin-bottom: 2rem;
   }
 
@@ -126,7 +126,7 @@
 /* RESPONSIVE - SMALL MOBILE */
 @media (max-width: 400px) {
   .heels-ad {
-    height: 250px;
+    height: 400px;
   }
 
   .heels-ad-content h2 {

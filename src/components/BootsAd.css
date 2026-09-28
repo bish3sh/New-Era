@@ -71,7 +71,7 @@
 /* RESPONSIVE - TABLET */
 @media (max-width: 900px) {
   .boots-ad {
-    height: 350px;
+    height:400px;
   }
 
   .boots-ad-overlay {
@@ -96,7 +96,7 @@
 /* RESPONSIVE - MOBILE */
 @media (max-width: 600px) {
   .boots-ad {
-    height: 300px;
+    height: 400px;
     margin-bottom: 2rem;
   }
 
@@ -121,7 +121,7 @@
 /* RESPONSIVE - SMALL MOBILE */
 @media (max-width: 400px) {
   .boots-ad {
-    height: 250px;
+    height: 400px;
   }
 
   .boots-ad-content h2 {
